@@ -1,0 +1,28 @@
+function titleCase(str) {
+  var tempStr=[];
+	tempStr=str.toLowerCase();
+	var smallStr=[];
+	
+	
+	tempStr=tempStr.split(' ');
+	for (var i=0;i<tempStr.length;i++){
+		smallStr.push(tempStr[i].split(''));
+	}
+	for (a=0;a<smallStr.length;a++){
+		smallStr[a][0]=capitalize(smallStr[a][0]);
+		smallStr[a]=smallStr[a].join('');
+	}
+	
+	smallStr=smallStr.join(' ');
+	function capitalize(letter){
+		var newLetter=letter.toString();
+		newLetter=newLetter.toUpperCase();
+		return newLetter;
+	}
+	console.log(tempStr);
+	console.log(smallStr);
+	
+	return smallStr;
+}
+
+titleCase("HERE IS MY HANDLE HERE IS MY SPOUT");

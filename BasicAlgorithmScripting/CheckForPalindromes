@@ -1,0 +1,31 @@
+function palindrome(str) {
+  // Good luck!
+  str=str.toLowerCase();
+  var rawArray=str.split('');
+  var filteredArray=rawArray.filter(removeSpace);
+  var str1=filteredArray.join('');
+  
+  var reversedArray=filteredArray.reverse();
+  var str2=reversedArray.join('');
+  if (str1===str2){
+    return true;}
+  else {
+    return false;
+  }
+}
+function removeSpace(value){
+  return (value!=" ")&&(value!="_")&&(value!="-")&&(value!="(")&&(value!=")")&&(value!=",")&&              (value!=".")&&(value!=":");
+}
+
+
+
+palindrome("eye");
+palindrome("racecar");
+palindrome("RaceCar");
+palindrome("race CAR");
+palindrome("not a palindrome");
+palindrome("A man, a plan, a canal. Panama");
+palindrome("My age is 0, 0 si ega ym.");
+palindrome("0_0 (: /-\ :) 0-0");
+
+

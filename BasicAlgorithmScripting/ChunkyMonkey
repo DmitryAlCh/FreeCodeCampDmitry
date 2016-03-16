@@ -1,0 +1,26 @@
+function chunk(arr, size) {
+  // Break it up.
+  var loops=(arr.length/size);
+  var outerArray=[];
+  var innerArray=[];
+  var sliceStart=0;
+  var sliceEnd=size;
+  for (var i=0;i<loops;i++){
+    innerArray=arr.slice(sliceStart,sliceEnd);
+    outerArray.push(innerArray);
+    sliceStart+=size;
+    sliceEnd+=size;
+    
+  }
+  
+  console.log(arr);
+  console.log(innerArray);
+  console.log(loops);
+  console.log(outerArray);
+  
+  return outerArray;
+}
+
+//chunk(["a", "b", "c", "d"], 2);
+chunk([0, 1, 2, 3, 4, 5], 4);
+//chunk([0, 1, 2, 3, 4, 5], 2);

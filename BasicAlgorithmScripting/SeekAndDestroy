@@ -1,0 +1,16 @@
+var arr=[1,1,1,2,1,2,1];
+var element=1;
+var elIndex=0;
+for (var i=0;i<arr.length;i++){
+	if (arr[i]===element){
+		arr.splice(i,1);
+		i--;
+	}
+}
+console.log("splice approach "+arr);
+var filterred=[];
+var myFilter=function(value){
+	return (value!=element);
+};
+filterred=arr.filter(myFilter);
+console.log("Filter Method approach "+filterred);

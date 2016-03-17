@@ -1,0 +1,60 @@
+function rot13(str){
+  
+	//make a refernce array;
+  var alphArr=makeCharCode("ABCDEFGHIJGKLMNOPQRSTUVXYWZ");
+  console.log(alphArr);
+
+	//get rules of alphabet
+  var lowMargin=alphArr[0];
+  var topMargin=alphArr[(alphArr.length-1)];
+	
+	//make a coded array;
+  var codeArr=makeCharCode(str);
+  console.log(codeArr);
+
+	//set rotation value
+  var val=13;
+
+	//rotate values in array
+  for (var i=0;i<codeArr.length;i++){
+	  //omit spacebars, dots, questiens alterisks
+	  switch(codeArr[i]){
+			case 32:
+			case 46:
+			case 33:
+			case 63:
+				break;
+			default:
+				codeArr[i]-=val;
+		    //circle our shift
+			  if(codeArr[i]<lowMargin){
+		      codeArr[i]=(topMargin-(lowMargin-codeArr[i]-1));
+				}
+	  }
+  }
+
+  console.log(codeArr);
+  var answerString="";
+	answerString=makeString(codeArr);
+	console.log(answerString);
+	return answerString;
+}
+
+function makeCharCode(str){
+	var arr=[];
+  for (var j=0;j<str.length;j++){
+	arr.push(str.charCodeAt(j));
+  }
+	return arr;
+}
+function makeString(arr){
+	var str="";
+	for (var i=0;i<arr.length;i++){
+		str+=String.fromCharCode(arr[i]);
+	}
+	return str;
+}
+
+
+rot13("SERR PBQR PNZC");
+rot13("GUR DHVPX OEBJA QBT WHZCRQ BIRE GUR YNML SBK.");

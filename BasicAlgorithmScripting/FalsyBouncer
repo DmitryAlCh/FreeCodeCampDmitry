@@ -1,0 +1,23 @@
+function bouncer(arr) {
+  // Make an new array.
+  var filteredArr=[];
+	//set a filter function	
+	function myFilter(value){
+	  if (typeof(value)==="string"&&value!=="" ||typeof(value)==="number" &&
+			 value!==0 && !isNaN(value)){
+			return true;
+		} 
+		return false;
+	}
+	filteredArr=arr.filter(myFilter);
+	console.log(filteredArr);
+	return filteredArr;
+	
+}
+
+
+
+bouncer([7, "ate", "", false, 9]);
+bouncer(["a", "b", "c"]);
+bouncer([false, null, 0, NaN, undefined, ""]);
+bouncer([1, null, NaN, 2, undefined]);

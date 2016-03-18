@@ -1,0 +1,30 @@
+function where(arr, num) {
+  // Find my place in this sorted array.
+  arr.sort(mySortFunction); //sort accending
+	
+	if (arr.indexOf(num)>=0){ //if we have exact number return it's index
+		return arr.indexOf(num);
+		
+	} else if(num>arr[arr.length-1]){  //if num is bigger then biggest
+		//console.log("value outside the range "+arr);
+		return arr.length;
+		
+	} else{ //if num is inside the range
+		for (var i=0;i<arr.length;i++){
+			if(arr[i]>num){
+				return i;
+			}
+		}
+	}
+}
+function mySortFunction(a,b){
+	return a-b; //accending
+}
+
+console.log(where([40, 60], 50));
+console.log(where([10, 20, 30, 40, 50], 30));
+console.log(where([10, 20, 30, 40, 50], 35));
+//where([3, 10, 5], 3);
+//where([5, 3, 20, 3], 5);
+//where([2, 20, 10], 19);
+//console.log(where([2, 5, 10], 15));

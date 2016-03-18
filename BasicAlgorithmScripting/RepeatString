@@ -1,0 +1,19 @@
+function repeat(str, num) {
+  // repeat after me
+  var arr=[];
+	if (num>0){
+		for(var i=0;i<num;i++){
+			arr.push(str);
+		}
+	}else {str="";}
+	arr=arr.join('');
+	console.log(arr);
+	return arr;
+}
+
+repeat("abc", 3);
+repeat("abc", 4);
+repeat("abc", 1);
+repeat("*", 8);
+repeat("abc", -2);
+repeat("*", 3);

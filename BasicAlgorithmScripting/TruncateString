@@ -1,0 +1,20 @@
+function truncate(str, num) {
+  // Clear out that junk in your trunk
+  if (num<=3){
+		//dots are added
+		str=str.slice(0,num);
+		str+="...";
+		console.log(str);
+		return str;
+	} else if(num<str.length){
+		//dots come as a replacements
+		console.log(str.length);
+		str=str.slice(0,num-3);
+		str+="...";
+		console.log(str);
+		return str;
+	} 
+	  console.log(str);
+		return str;
+	
+}

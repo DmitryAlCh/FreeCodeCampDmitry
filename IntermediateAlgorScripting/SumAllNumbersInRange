@@ -1,0 +1,16 @@
+function sumAll(arr) {
+  arr=arr.sort(mySortFunction);
+	console.log(arr);
+	var rangeSum=0;
+	for (var i=arr[0];i<=arr[1];i++){
+		console.log(i);
+		rangeSum+=i;
+	}
+	console.log(rangeSum);
+	return rangeSum;
+}
+function mySortFunction(a,b){
+	return a-b;
+}
+sumAll([1, 4]);
+sumAll([10, 5]);

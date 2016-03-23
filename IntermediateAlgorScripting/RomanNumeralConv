@@ -1,0 +1,47 @@
+function convert(num) {
+  romanRules(splitDecimal(num)); 
+	return num;
+}
+
+convert(1611);
+
+
+function splitDecimal(num){
+	//divide input number by 10,100,1000,10000 and check
+	//whole part and remainder
+	var arr=[];	
+  for (var i=1;i<=10000;i*=10){
+		arr.push(num%i);
+		num=num-num%i;
+	}
+	arr=arr.reverse();
+	console.log(arr);
+	return arr; //364 = [300,60,4,0];
+}
+function romanRules(arr){
+	var romanArray=[];
+	for (var i=0;i<arr.length;i++){
+		switch (arr[i]){
+			case 1000:
+				romanArray.push("M");
+			break;
+			case 500:
+				romanArray.push("D");
+			break;
+			case 100:
+				romanArray.push("C");
+				break;
+			case 10:
+				romanArray.push("X");
+				break;
+			case 1:
+				romanArray.push("I");
+				break;
+			default:
+				romanArray.push("default");
+				break;
+		}
+	}
+	console.log(romanArray);
+	return romanArray;
+}

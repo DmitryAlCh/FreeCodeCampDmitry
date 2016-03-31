@@ -1,0 +1,3 @@
+In progress...
+A JavaScript base calculator project
+as a task for FreeCodeCamp.com

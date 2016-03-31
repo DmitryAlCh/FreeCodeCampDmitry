@@ -1,0 +1,37 @@
+<!Doctype HTML>
+<head>
+    <link rel="stylesheet" href="main.css">
+    <script src="calc.js"></script>
+</head>
+<body>
+    <header>
+        <h2>Javascript based simple calculator project</h2>
+    </header>
+    <div class="calcBody">
+        <div class="row">
+            <p id="lcd">0</p>
+        </div>
+        <div class="doubleColumn">
+            <div class="row" id="digButton">
+                <button id="one">1</button>
+                <button id ="two">2</button>
+                <button id="three">3</button>
+            </div>
+            <div class="row" id="funcButton">
+                <button id="ce">CE</button>
+                
+            </div>
+        </div>
+        <div class="row">
+            <button id="four">4</button>
+            <button onclick="myFunction(5);">5</button>
+            <button onclick="myFunction(6);">6</button>
+        </div>
+        <div class="row">
+            <button onclick="myFunction('+');">+</button>
+            <button onclick="myFunction('-');">-</button>
+            <button onclick="myFunction('*');">*</button>
+        </div>
+    </div>
+</body>
+</html>

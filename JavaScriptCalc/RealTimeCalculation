@@ -1,0 +1,15 @@
+function getRes(argOne,action,argTwo){
+  if ((argOne===undefined)&&(argTwo===undefined)){
+    return 0;
+  } else if ((argOne!==undefined)&&(argTwo===undefined)){
+    return argOne;
+  } else if ((argOne===undefined)&&(argTwo!==undefined)){
+    return argTwo;
+  } else if (action!==undefined){
+    return argOne+argTwo;
+  }
+}
+var argOne=1;
+var argTwo=33;
+var action=2;
+console.log(getRes(argOne,action,argTwo));

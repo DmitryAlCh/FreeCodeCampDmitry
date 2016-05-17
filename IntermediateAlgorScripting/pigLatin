@@ -1,0 +1,56 @@
+function translatePigLatin(str) {
+  var arr = str.split('');
+  var indexes=[];
+  var replacedLetters=[];
+  for (var i = 0;i<arr.length;i++){
+    if (vowel(arr[i])){
+      //if true
+      console.log('found vowel '+arr[i]);
+      break;
+      
+    }
+    else{
+      replacedLetters.push(arr[i]);
+      indexes.push(i);
+    }
+  }
+  //delete consonants from the begining of array
+  if (indexes.length!==0){
+    var locIndex=indexes.length;
+    console.log(locIndex);
+    arr.splice(0,locIndex);
+    
+    //add consonant letters to the end of arry
+    arr=arr.concat(replacedLetters);
+    //add "ay" ending
+    arr.push("a");
+    arr.push("y");
+  } else{
+    //no Indexes means no consonant letters in the beginning of word;
+    arr.push("w");
+    arr.push("a");
+    arr.push("y");
+    
+  }
+  
+  
+  console.log(arr);
+  console.log(replacedLetters);
+  console.log(indexes);
+  str=arr.join('');
+  console.log("result= "+str);
+  return str;
+}
+
+function vowel(str){
+  var vowels="aeuio";
+  if (vowels.indexOf(str)>=0){
+    return true;
+  } else {
+    return false;
+  }
+ }
+
+
+translatePigLatin("california");
+translatePigLatin("eight");

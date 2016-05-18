@@ -1,0 +1,29 @@
+function pairElement(str) {
+  var arr=str.split('');
+  var newArr=[];
+  for (var i=0;i<arr.length;i++){
+    newArr.push(pair(arr[i]));
+  }
+  console.log(newArr);
+  return newArr;
+}
+function pair(gene){
+  var genePair=[];
+  genePair.push(gene);
+  switch (gene){
+    case "A":
+      genePair.push("T");
+      break;
+    case "T":
+      genePair.push("A");
+      break;
+    case "C":
+      genePair.push("G");
+      break;
+    case "G":
+      genePair.push("C");
+      break;
+  }
+  return genePair;
+}
+pairElement("GCG");

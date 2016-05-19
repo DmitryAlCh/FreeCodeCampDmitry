@@ -1,0 +1,43 @@
+function fearNotLetter(str) {
+  var strArr=[];
+  var calcArr=[];
+  var resultArr=[];
+  var tempArr=[];
+  //get the begining of letters sequence
+  var startChar=str.charCodeAt(0);
+  //get str into array
+  //make correct arry to compare to
+  for (var i=0;i<str.length;i++){
+    strArr.push(str.charCodeAt(i));
+    calcArr.push(startChar+i);
+  }
+  console.log("original array: "+strArr);
+  console.log("calculated array: "+calcArr);
+  
+  //compare both arrays
+  for (var j=0;j<calcArr.length;j++){
+    var comparison=(calcArr[j]-strArr[j]);
+    switch (comparison){
+      //letter codes are same
+      case 0: 
+        resultArr.push(calcArr[j]);
+        break;
+      //letter codes are different by 1 position
+      case -1:
+        resultArr.push(calcArr[j]);
+        resultArr.push(strArr[j]);
+        break;
+    }
+  }
+  console.log("resultArray= "+resultArr);
+  //derive string from sequence;
+  for (var c=0;c<resultArr.length;c++){
+    tempArr.push(String.fromCharCode(resultArr[c]));
+  }
+  tempArr=tempArr.join('');
+  console.log(tempArr);
+  
+  return temmpArr;
+}
+
+fearNotLetter("abcdf");

@@ -1,0 +1,59 @@
+function sumPrimes(num){
+  var primeArr=[];
+  var tempArr=[];
+  for (var i=2;i<=num;i++){
+    tempArr.push(i);
+  }
+ 
+  tempArr=tempArr.filter(
+    function(value){
+      if (value!==2 && (Number.isInteger(value/2))){
+        return false;
+      }
+      return true;
+    }  
+  );
+  
+   tempArr=tempArr.filter(
+    function(value){
+      if (value!==3 && (Number.isInteger(value/3))){
+        return false;
+      }
+      return true;
+    }
+  );
+  tempArr=tempArr.filter(
+    function(value){
+      if (value!==5 && (Number.isInteger(value/5))){
+        return false;
+      }
+      return true;
+    }
+  );
+  tempArr=tempArr.filter(
+    function(value){
+      if (value!==7 && (Number.isInteger(value/7))){
+        return false;
+      }
+      return true;
+    }
+  );
+  
+  tempArr=tempArr.filter(
+    function(value){
+      if (Number.isInteger(Math.sqrt(value))){
+        return false;
+      }
+      return true;
+    }
+  );
+  
+  console.log(tempArr);
+  var sum = tempArr.reduce(
+    function(a,b){
+      return a+b;
+    }
+  );
+  console.log(num+" "+sum);
+}
+sumPrimes(150);

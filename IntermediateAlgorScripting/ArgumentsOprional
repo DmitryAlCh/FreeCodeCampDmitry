@@ -1,0 +1,30 @@
+function addTogether() {
+  //create an array from 'arguments' object
+  var args=Array.from(arguments);
+  //check if passed values are numbers
+  if (args.every(isNumber)){
+    //if we have only 1 argument passed, return a function
+    if (args.length===1){
+      return function(x){
+        console.log("typeOf x: "+typeof(x));
+        //one more check for number
+        if (typeof(x)==="number"){
+          return args[0]+x;
+      }
+    };
+  } else{
+  //if 2 arguments are passed, just sum them.
+      return args[0]+args[1];
+      }
+  }
+}
+
+function isNumber(value){
+  return typeof value==="number";
+}
+
+//addTogether(2,3);
+//addTogether([3]);
+//console.log(addTogether(2)(3));
+//console.log(addTogether(2,3));
+console.log(addTogether("text"));

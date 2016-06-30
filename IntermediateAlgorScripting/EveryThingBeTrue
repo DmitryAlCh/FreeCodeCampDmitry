@@ -1,0 +1,39 @@
+function truthCheck(collection, pre) {
+  for (var i=0;i<collection.length;i++){
+    if (myCheck(collection[i],pre)){
+      console.log("object has a property: "+pre);
+      switch (typeCheck(collection[i],pre)){
+        
+        case "object":
+          return false;
+        case "string":
+          if (collection[i][pre]===""){
+            return false;
+          }
+          break;
+        case "number":
+          if (collection[i][pre]===0){
+            return false;
+          }
+          if (isNaN(collection[i][pre])){
+            return false;
+          }
+          break;
+        case "undefined":
+          return false;
+          
+      }     
+    }else{
+      console.log("object has No property: "+pre);
+      return false;
+    }
+  }
+  return true;
+}
+function myCheck(obj,pre){
+  return obj.hasOwnProperty(pre);
+}
+function typeCheck(obj,pre){
+  console.log("objects type of property is: "+typeof(obj[pre]));
+  return typeof(obj[pre]);
+}

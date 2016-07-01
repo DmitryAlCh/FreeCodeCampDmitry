@@ -1,0 +1,21 @@
+function uniteUnique(arr) {
+  var answer=[];
+  var args=Array.from(arguments);
+  var flattened=args.reduce(function(a,b){
+    return a.concat(b);
+  });
+  console.log(args);
+  console.log(flattened);
+  
+  for (var i=0;i<flattened.length;i++){
+    console.log(flattened[i]);
+    if (answer.indexOf(flattened[i])<0){
+      answer.push(flattened[i]);  
+    }
+    
+  }
+  console.log(answer);
+  return answer;
+}
+
+uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]);

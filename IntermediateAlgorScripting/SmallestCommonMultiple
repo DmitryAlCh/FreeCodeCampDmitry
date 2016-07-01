@@ -1,0 +1,38 @@
+function smallestCommons(arr) {
+  var expandedArray=[];
+  arr=arr.sort();
+  for (var i=1;i<=arr[1];i++){
+    expandedArray.push(i);
+  }
+  
+  console.log("input array: "+arr);
+  console.log("expanden whole tange array:" +expandedArray);
+  
+  var upperSearchLimit=expandedArray.reduce(function(a,b){
+    return a*b;
+  });
+  console.log("upper search limit: "+upperSearchLimit);
+  var searchStep=expandedArray[expandedArray.length-1];
+  
+  console.log("searchStep is: "+searchStep);
+  //search itself:
+  
+  for (var j=1;j<=upperSearchLimit;j++){
+    if(checkIfNoRemainder(expandedArray,j)){
+      console.log("smallest common Multiple is: "+j);
+      return j;
+    }
+  }
+  
+ 
+  return arr;
+}
+
+function checkIfNoRemainder(arr,value){
+  return (arr.every(function(element){
+    return (value%element===0);
+  }));
+}
+
+
+smallestCommons([5,1]);

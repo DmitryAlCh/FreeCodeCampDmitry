@@ -1,0 +1,24 @@
+function dropElements(arr, func) {
+  // Drop them elements.
+  
+  var myFunction=arguments[1]; //assign passed function to local function
+  var myArr=arguments[0]; //local array
+  
+  var myIndex=myArr.findIndex(myFunction); 
+    console.log(myIndex);
+  if (myIndex<0){
+   
+    myArr=[];
+    console.log(myArr);
+    return myArr;
+  }
+
+  
+  myArr=myArr.slice(myIndex);
+  console.log(myArr);
+  return myArr;
+}
+
+dropElements([1, 2, 3, 4], function(n) {return n >= 5;});
+dropElements([1, 2, 3, 4], function(n) {return n >= 3;}); //should return [3, 4];
+dropElements([1, 2, 3, 7, 4], function(n) {return n > 3;}); //should return [7, 4];

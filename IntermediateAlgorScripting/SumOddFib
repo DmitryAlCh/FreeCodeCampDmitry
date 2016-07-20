@@ -1,0 +1,38 @@
+function sumFibs(num){
+  var arr=[0,1];
+ // var ceiling=Math.floor(Math.sqrt(num+2));
+  var ceiling=num;
+
+  
+  for (var i=0;i<ceiling;i++) {
+    var fibOne=arr[arr.length-2];
+    var fibTwo=arr[arr.length-1];
+    var fibNew=fibOne+fibTwo;
+    
+    
+    if (fibNew>num){
+      break;
+    }
+    arr.push(fibNew);
+  }
+  
+  console.log(arr);
+  arr=arr.filter(checkOdd);
+  console.log(arr);
+  
+  var sum=arr.reduce(function(a,b){return a+b;});
+  console.log(sum);
+  return sum;
+}
+function checkOdd(val){
+  if (val%2!==0){
+    return true;
+  }
+  return false;
+}
+
+sumFibs(1);
+sumFibs(4);
+sumFibs(1000);
+sumFibs(4000000);
+

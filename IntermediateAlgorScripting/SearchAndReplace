@@ -7,7 +7,7 @@ function myReplace(str, before, after) {
   
   if (beforeIndex>=0){
     if(checkIfCapitalLetter(arr[beforeIndex])){
-      after.capitalizeFirstLetter();
+      after=capitalizeFirstLetter(after);
       console.log(after);
     }
     arr[beforeIndex]=after;
@@ -19,7 +19,7 @@ function myReplace(str, before, after) {
 }
 
 function checkIfCapitalLetter(word){ //returns TRUE if first letter is cap.
-  if (word[0]===word[0].toLowerCase){
+  if (word[0]===word[0].toLowerCase()){
     console.log("lowercase");
     return false;
   }else{
@@ -28,11 +28,11 @@ function checkIfCapitalLetter(word){ //returns TRUE if first letter is cap.
   }
 }
 function capitalizeFirstLetter(word){
-  return word.charAt(0).toUpperCase();
+  return word.charAt(0).toUpperCase()+word.slice(1);
 }
 
-//myReplace("A quick brown fox jumped over the lazy dog", "jumped", "leaped");
+myReplace("A quick brown fox jumped over the lazy dog", "jumped", "leaped");
 //myReplace("Let us go to the store", "store", "mall");
-myReplace("He is Sleeping on the couch", "Sleeping", "sitting");
+//myReplace("He is Sleeping on the couch", "Sleeping", "sitting");
 //myReplace("This has a spellngi error", "spellngi", "spelling");
 //myReplace("His name is Tom", "Tom", "john");

@@ -1,0 +1,18 @@
+svg{
+  border: solid black 2px;
+}
+#YellowButton:hover{
+  cursor:pointer;
+}
+#GreenButton:hover{
+  cursor:pointer;
+}
+#BlueButton:hover{
+  cursor:pointer;
+}
+#RedButton:hover{
+  cursor:pointer;
+}
+#purpleButton:hover{
+  cursor:pointer;
+}

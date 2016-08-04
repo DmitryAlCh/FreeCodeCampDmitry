@@ -180,6 +180,7 @@ function startUp(){
     case SimonGame.interface.pButtonId: //this is a START button
       pBackLight.style="black";
       //start the game here;
+      resetGame();
       startGame();
     break;
     }
@@ -206,6 +207,9 @@ function startUp(){
         break;
         case false:
           console.log("sequence is inCorrect");
+          //need to restart the same sequence
+          SimonGame.user.sequence=[];
+          startGame();
         break;
         case undefined:
           console.log("need to wait for more input");
@@ -235,8 +239,9 @@ function startUp(){
 //console.log(SimonGame);
 //console.log(rBackLight);
 //console.log(yBackLight);
-function cutArrayAccordingly(){
-
+function resetGame(){
+  SimonGame.user.sequence=[];
+  SimonGame.user.currentPosition=0;
 }
 
 function startGame(){

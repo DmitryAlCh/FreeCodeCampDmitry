@@ -23,6 +23,10 @@ function startUp(){
     "rBackLight":"RedLight",
     "rColor":"#d40000",
     "rSound":"Red_310Hz.wav",
+    "pButtonId":"PurpleButton",
+    "pBackLight":"PurpleLight",
+    "pColor":"#800080",
+    "pSound":"Purple_62Jz.wav",
 
 
     //red and purple buttons to go.
@@ -36,7 +40,9 @@ function startUp(){
     ],
   };
   SimonGame.user={"sequence":
-  []
+  [],
+  "currentPosition":0,
+  "currentPlayback":false,
 };
 //**********************     Iterface part   ********************************
   var yButton=document.getElementById(SimonGame.interface.yButtonId);
@@ -54,6 +60,11 @@ function startUp(){
   var rButton=document.getElementById(SimonGame.interface.rButtonId);
   var rBackLight=document.getElementById(SimonGame.interface.rBackLight);
   var rAudio=new Audio(SimonGame.interface.rSound);
+
+  var pButton=document.getElementById(SimonGame.interface.pButtonId);
+  var pBackLight=document.getElementById(SimonGame.interface.pBackLight);
+  var pAudio=new Audio(SimonGame.interface.pSound);
+
 
   yButton.addEventListener("click",function(){
     animateButton(SimonGame.interface.yButtonId);
@@ -75,17 +86,24 @@ function startUp(){
     readSequence(SimonGame.interface.rButtonId);
   });
 
+  pButton.addEventListener("click",function(){
+    animateButton(SimonGame.interface.pButtonId);
+
+    //readSequence(SimonGame.interface.rButtonId);
+  });
+
 //*********************       Logic part     *****************************
   function animateButton(whichButton){
-    //todo need to play sound also
-    setBackLight(whichButton);
-    playSound(whichButton);
-    setTimeout(function(){
-      returnBackLight(whichButton);
-    },1800);
-
+    if (SimonGame.user.currentPlayback===false){
+      setBackLight(whichButton);
+      playSound(whichButton);
+      setTimeout(function(){
+        returnBackLight(whichButton);
+      },1800);
+    }
   }
   function playSound(whichButton){
+
     switch (whichButton){
       case SimonGame.interface.yButtonId:
         yAudio.play();
@@ -99,9 +117,12 @@ function startUp(){
       case SimonGame.interface.rButtonId:
         rAudio.play();
       break;
+      case SimonGame.interface.pButtonId:
+        pAudio.play();
     }
   }
   function setBackLight(whichButton){
+    SimonGame.user.currentPlayback=true;
     switch (whichButton){
       case SimonGame.interface.yButtonId:
         yBackLight.style="fill:"+SimonGame.interface.yColor+";filter:url(#filter4307)";
@@ -115,12 +136,17 @@ function startUp(){
       case SimonGame.interface.rButtonId:
         rBackLight.style="fill:"+SimonGame.interface.rColor+";filter:url(#filter4307)";
       break;
+      case SimonGame.interface.pButtonId:
+        pBackLight.style="fill:"+SimonGame.interface.pColor+";filter:url(#filter4307)";
+      break;
     }
   }
   function returnBackLight(whichButton){
+    SimonGame.user.currentPlayback=false;
     switch (whichButton){
     case SimonGame.interface.yButtonId:
       yBackLight.style="black";
+
     break;
     case SimonGame.interface.gButtonId:
       gBackLight.style="black";
@@ -130,6 +156,11 @@ function startUp(){
     break;
     case SimonGame.interface.rButtonId:
       rBackLight.style="black";
+    break;
+    case SimonGame.interface.pButtonId:
+      pBackLight.style="black";
+      //start the game here;
+      startGame();
     break;
     }
   }
@@ -147,13 +178,16 @@ function startUp(){
 
   function readSequence(whichButton){
     SimonGame.user.sequence.push(whichButton);
-
-    if(compareSequences()){
-      console.log("sequence is correct");
-    } else{
+    //if (SimonGame.user.currentPlayback===false){
+      if(compareSequences()){
+        console.log("sequence is correct");
+        SimonGame.user.currentPosition++;
+        startGame();
+      } else{
       //here we stop game.
-      console.log("sequence is inCorrect");
-    }
+        console.log("sequence is inCorrect");
+      }
+    //}
   }
 
   function compareSequences(){
@@ -168,8 +202,11 @@ function startUp(){
   }
 
 //console.log(SimonGame);
-console.log(rBackLight);
+//console.log(rBackLight);
 //console.log(yBackLight);
-playSequence(3);
+
+function startGame(){
+    playSequence(SimonGame.user.currentPosition);
+  }
 
 }

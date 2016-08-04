@@ -35,8 +35,13 @@ function startUp(){
     "sequence":[
       SimonGame.interface.yButtonId,
       SimonGame.interface.gButtonId,
-      SimonGame.interface.yButtonId,
+      SimonGame.interface.rButtonId,
+      SimonGame.interface.bButtonId,
+      SimonGame.interface.rButtonId,
       SimonGame.interface.gButtonId,
+      SimonGame.interface.yButtonId,
+      SimonGame.interface.bButtonId,
+
     ],
   };
   SimonGame.user={"sequence":
@@ -67,39 +72,55 @@ function startUp(){
 
 
   yButton.addEventListener("click",function(){
-    animateButton(SimonGame.interface.yButtonId);
-    readSequence(SimonGame.interface.yButtonId);
+    animateButton(SimonGame.interface.yButtonId,"user");  //user - action called by user
+    //writeSequence(SimonGame.interface.yButtonId);
   });
 
   gButton.addEventListener("click",function(){
-    animateButton(SimonGame.interface.gButtonId);
-    readSequence(SimonGame.interface.gButtonId);
+    animateButton(SimonGame.interface.gButtonId,"user");
+    //writeSequence(SimonGame.interface.gButtonId);
   });
 
   bButton.addEventListener("click",function(){
-    animateButton(SimonGame.interface.bButtonId);
-    readSequence(SimonGame.interface.bButtonId);
+    animateButton(SimonGame.interface.bButtonId,"user");
+    //readSequence(SimonGame.interface.bButtonId);
   });
 
   rButton.addEventListener("click",function(){
-    animateButton(SimonGame.interface.rButtonId);
-    readSequence(SimonGame.interface.rButtonId);
+    animateButton(SimonGame.interface.rButtonId,"user");
+    //readSequence(SimonGame.interface.rButtonId);
   });
 
   pButton.addEventListener("click",function(){
-    animateButton(SimonGame.interface.pButtonId);
+    animateButton(SimonGame.interface.pButtonId,"user");
 
     //readSequence(SimonGame.interface.rButtonId);
   });
 
 //*********************       Logic part     *****************************
-  function animateButton(whichButton){
+  function animateButton(whichButton,simonOrUser){
     if (SimonGame.user.currentPlayback===false){
       setBackLight(whichButton);
       playSound(whichButton);
       setTimeout(function(){
         returnBackLight(whichButton);
       },1800);
+
+      switch (simonOrUser){
+        case "simon":
+        break;
+        case "user":
+          console.log("user called action");
+          writeSequence(whichButton);
+          //console.log(SimonGame.user.sequence);
+        break;
+      }
+    }
+  }
+  function writeSequence(whichButton){
+    if (whichButton!==SimonGame.interface.pButtonId){//don't write purple button
+      SimonGame.user.sequence.push(whichButton);
+      readSequence();
     }
   }
   function playSound(whichButton){
@@ -122,7 +143,7 @@ function startUp(){
     }
   }
   function setBackLight(whichButton){
-    SimonGame.user.currentPlayback=true;
+    SimonGame.user.currentPlayback=true; //buttons are busy, don't allow more pressings
     switch (whichButton){
       case SimonGame.interface.yButtonId:
         yBackLight.style="fill:"+SimonGame.interface.yColor+";filter:url(#filter4307)";
@@ -142,11 +163,10 @@ function startUp(){
     }
   }
   function returnBackLight(whichButton){
-    SimonGame.user.currentPlayback=false;
+    SimonGame.user.currentPlayback=false; //buttons are free to use
     switch (whichButton){
     case SimonGame.interface.yButtonId:
       yBackLight.style="black";
-
     break;
     case SimonGame.interface.gButtonId:
       gBackLight.style="black";
@@ -157,7 +177,7 @@ function startUp(){
     case SimonGame.interface.rButtonId:
       rBackLight.style="black";
     break;
-    case SimonGame.interface.pButtonId:
+    case SimonGame.interface.pButtonId: //this is a START button
       pBackLight.style="black";
       //start the game here;
       startGame();
@@ -168,7 +188,7 @@ function startUp(){
     //console.log("playSequnce called");
     var i=0;
     var locTimer=setInterval(function(){
-      animateButton(SimonGame.rules.sequence[i]);
+      animateButton(SimonGame.rules.sequence[i],"simon");
       i++;
       if (i>playMargin){
         clearInterval(locTimer);
@@ -177,36 +197,54 @@ function startUp(){
   }
 
   function readSequence(whichButton){
-    SimonGame.user.sequence.push(whichButton);
-    //if (SimonGame.user.currentPlayback===false){
-      if(compareSequences()){
-        console.log("sequence is correct");
-        SimonGame.user.currentPosition++;
-        startGame();
-      } else{
-      //here we stop game.
-        console.log("sequence is inCorrect");
+      switch (compareSequences()){
+        case true:
+          console.log("sequence is correct");
+          SimonGame.user.currentPosition++;
+          startGame();
+          SimonGame.user.sequence=[];
+        break;
+        case false:
+          console.log("sequence is inCorrect");
+        break;
+        case undefined:
+          console.log("need to wait for more input");
+        break;
       }
     //}
   }
 
+
   function compareSequences(){
     for (var j=0;j<SimonGame.user.sequence.length;j++){
-      if(SimonGame.user.sequence[j]!==SimonGame.rules.sequence[j]){
-        console.log("false");
-        return false;
+        if(SimonGame.user.sequence[j]!==SimonGame.rules.sequence[j]){
+          console.log("false");
+          return false;
+        }
       }
-    }
-    console.log("true");
-    return true;
+      console.log(SimonGame.user.sequence.length+" "+SimonGame.user.currentPosition);
+      if (SimonGame.user.sequence.length>SimonGame.user.currentPosition){
+        return true;
+      } else {
+        return undefined;
+      }
+
   }
+
 
 //console.log(SimonGame);
 //console.log(rBackLight);
 //console.log(yBackLight);
+function cutArrayAccordingly(){
+
+}
 
 function startGame(){
     playSequence(SimonGame.user.currentPosition);
+    if (SimonGame.user.currentPosition>SimonGame.rules.sequence.length){
+      console.log("You won the game");
+    }
+
   }
 
 }
